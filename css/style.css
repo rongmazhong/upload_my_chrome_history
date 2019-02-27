@@ -1,0 +1,59 @@
+body {
+    font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+    margin-top: 0;
+    min-width: 300px;
+}
+
+.global-box h2 {
+    font-size: 25px;
+}
+
+.action-button {
+    border-radius: 5px;
+    color: #FFF;
+    float: left;
+    font-size: 15px;
+    margin: 0px 10px 10px 0px;
+    padding: 5px 13px;
+    position: relative;
+    text-decoration: none;
+}
+
+#btn-day {
+    background-color: #3498DB;
+    border-bottom: 2px solid #2980B9;
+    text-shadow: 0px -2px #2980B9;
+}
+
+#btn-day:hover{
+    background-color: #2977AB;
+}
+
+#btn-week {
+    background-color: #82BF56;
+    border-bottom: 2px solid #669644;
+    text-shadow: 0px -2px #669644;
+}
+
+#btn-week:hover {
+    background-color: #6A9C46;
+}
+
+#btn-all {
+    background-color: #F2A007;
+    border-bottom: 2px solid #C78406;
+    text-shadow: 0px -2px #C78406;
+}
+
+#btn-all:hover {
+    background-color: #DE9306;
+}
+
+.global-box {
+    padding: 0 5px 5px 8px;
+    height: 85px;
+}
+
+#info-text {
+    padding-bottom: 15px;
+}

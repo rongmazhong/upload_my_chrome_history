@@ -1,0 +1,14 @@
+{
+   "browser_action": {
+      "default_popup": "popup.html"
+   },
+   "description": "This extension allow to export your browser history",
+   "icons": {
+      "128": "icon_128.png"
+   },
+   "manifest_version": 2,
+   "name": "Back my History ",
+   "permissions": [ "history", "downloads" ],
+   "version": "0.1",
+   "web_accessible_resources": [ "css/style.css" ]
+}
