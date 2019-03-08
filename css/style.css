@@ -49,6 +49,17 @@ body {
     background-color: #DE9306;
 }
 
+#btn-show {
+    background-color: #2977AB;
+    border-bottom: 2px solid #669644;
+    text-shadow: 0px -2px #2980B9;
+}
+
+
+#btn-show:hover{
+    background-color: #3498DB;
+}
+
 .global-box {
     padding: 0 5px 5px 8px;
     height: 85px;
