@@ -36,10 +36,27 @@ History.prototype.download = function (history) {
   });
 }
 
-History.prototype.prepareHistoryJSON = function (history) {
+History.prototype.prepareHistoryJSON = function (history) {}
 
+// 显示搜索数据
+History.prototype.show = function (history) {
+  var data = [];
+  var index;
+  for (i = 0; i < history.length; i++) {
+    var item = history[i]
+    if (item.url) {
+      if (item.url.indexOf('https://www.google.com/search') >= 0) {
+        data.push(item)
+        var aDom = document.getElementById('show-items')
+        var li = document.createElement('li')
+        li.innerHTML = item.title
+        aDom.appendChild(li)
+      }
+    }
+  }
 }
 
+// 上传历史数据到服务器 
 History.prototype.upload = function (history) {
   var data = [];
   var index;
@@ -54,21 +71,10 @@ History.prototype.upload = function (history) {
       'visitCount': history[index].visitCount
     });
   }
-  var params = {
-    "id": 1,
-    "name": "xxx",
-    "tickets": [{
-      "id": 11,
-      "scName": "sadf"
-    }, {
-      "id": 13,
-      "scName": "ewsadf"
-    }]
-  }
   const xhr = new XMLHttpRequest()
   xhr.open("POST", "http://localhost:8080/coupons/getJson", true);
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(params))
+  xhr.send(JSON.stringify(data))
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE && this.status == 200) {
       alert("ok");
@@ -76,15 +82,17 @@ History.prototype.upload = function (history) {
   }
 }
 
-History.prototype.getHistory = function (days) {
+History.prototype.getHistory = function (days, callback) {
   var now = new Date();
   var startTime = this.daysBefore(now, days);
   chrome.history.search({
     'text': '',
     'maxResults': 1000000,
     'startTime': startTime,
-  // }, this.download);
-  }, this.upload);
+    // }, this.download);
+  }, function (data) {
+    callback && callback(data)
+  });
 }
 
 History.prototype.daysBefore = function (date, days) {
@@ -97,12 +105,23 @@ document.addEventListener('DOMContentLoaded', function () {
   var history = new History();
 
   document.getElementById('btn-day').onclick = function () {
-    history.getHistory(1);
+    history.getHistory(1, function (data) {
+      history.download(data)
+    });
   };
   document.getElementById('btn-week').onclick = function () {
-    history.getHistory(7);
+    history.getHistory(7, function (data) {
+      history.download(data)
+    });
   };
   document.getElementById('btn-all').onclick = function () {
-    history.getHistory(100);
+    history.getHistory(100, function (data) {
+      history.download(data)
+    });
   };
+  document.getElementById('btn-show').onclick = function () {
+    history.getHistory(7, function (data) {
+      history.show(data)
+    })
+  }
 });
